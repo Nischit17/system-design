@@ -1,0 +1,781 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Loadline design tokens: "mission control".
+   The site always runs in the dark ops theme (html.ops-theme). The light
+   tokens on :root back the long-form learning guides (.sd-light) and the
+   light problem cards on roadmaps.
+--------------------------------------------------------------------------- */
+
+@theme inline {
+  --font-sans: var(--font-manrope);
+  --font-mono: var(--font-jetbrains-mono);
+  --font-code: var(--font-jetbrains-mono);
+  --default-font-family: var(--font-manrope);
+  --default-mono-font-family: var(--font-jetbrains-mono);
+
+  --color-background: var(--background);
+  --color-background-elevated: var(--background-elevated);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-hover: var(--surface-hover);
+  --color-surface-active: var(--surface-active);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-on-accent: var(--on-accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-glow: var(--accent-glow);
+  --color-mint: var(--mint);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
+  --color-fix: var(--fix);
+  --color-roadmap-gold: var(--roadmap-gold);
+  --color-card-light-bg: #f5f6fb;
+  --color-card-light-text: #0b0d17;
+  --color-card-light-muted: #626884;
+  --color-badge-available-bg: #d7f9ee;
+  --color-badge-available-text: #0b6e52;
+  --color-streak-1: var(--streak-1);
+  --color-streak-2: var(--streak-2);
+  --color-streak-3: var(--streak-3);
+  --color-streak-4: var(--streak-4);
+
+  --ease-spring-interactive: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring-soft: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@utility duration-fast {
+  transition-duration: 0.15s;
+}
+@utility duration-normal {
+  transition-duration: 0.22s;
+}
+@utility duration-slow {
+  transition-duration: 0.4s;
+}
+
+:root {
+  color-scheme: light;
+  --duration-fast: 0.15s;
+  --duration-normal: 0.22s;
+  --duration-slow: 0.4s;
+  --background: #f5f6fb;
+  --background-elevated: #eceef6;
+  --surface: #fff;
+  --surface-raised: #fff;
+  --surface-hover: #f0f1f8;
+  --surface-active: #e5e7f2;
+  --text-primary: #0b0d17;
+  --text-secondary: #3b4058;
+  --text-muted: #6b7090;
+  --border: #0b0d171f;
+  --border-strong: #0b0d173d;
+  --accent: #6c4bff;
+  --accent-strong: #6c4bff;
+  --on-accent: #fff;
+  --accent-soft: #6c4bff1f;
+  --accent-glow: #6c4bff4d;
+  --mint: #0ea57a;
+  --success: #0e9f73;
+  --warning: #b8701a;
+  --danger: #d13a5c;
+  --info: #2a7fd4;
+  --fix: #b8324f;
+  --roadmap-gold: #b8860b;
+  --roadmap-gold-glow: #b8860b59;
+  --grid-line: #6c4bff0d;
+  --streak-1: #d9d2ff;
+  --streak-2: #a996ff;
+  --streak-3: #7457ff;
+  --streak-4: #4a2fd1;
+}
+
+html.ops-theme {
+  color-scheme: dark;
+  --background: #07080c;
+  --site-chrome-bg: #07080c;
+  --background-elevated: #0c0e16;
+  --surface: #0f111a;
+  --surface-raised: #121522;
+  --surface-hover: #161a29;
+  --surface-active: #1d2134;
+  --text-primary: #f5f7ff;
+  --text-secondary: #f5f7ffc7;
+  --text-muted: #f5f7ff85;
+  --border: #f5f7ff1a;
+  --border-strong: #f5f7ff33;
+  --accent: #9b82ff;
+  --accent-strong: #6c4bff;
+  --on-accent: #fff;
+  --accent-soft: #9b82ff24;
+  --accent-glow: #7c5cff73;
+  --mint: #3cffc2;
+  --success: #3ce6b0;
+  --warning: #ffb547;
+  --danger: #ff5c7a;
+  --info: #5cc8ff;
+  --fix: #8f2340;
+  --roadmap-gold: #ffc857;
+  --roadmap-gold-glow: #ffc8578c;
+  --grid-line: #9b82ff0d;
+  --streak-1: #261f4d;
+  --streak-2: #43348f;
+  --streak-3: #7457ff;
+  --streak-4: #b4a2ff;
+}
+
+/* Light reading surface: learning guides when the reader picks the light theme. */
+.sd-light,
+html[data-guide-theme="light"] .guide-theme {
+  color-scheme: light;
+  --accent-glow: #6c4bff40;
+  --roadmap-gold: #b8860b;
+  --roadmap-gold-glow: #b8860b59;
+  --grid-line: #6c4bff0f;
+  --background: #fff;
+  --background-elevated: #f4f5fb;
+  --surface: #fff;
+  --surface-raised: #fff;
+  --surface-hover: #f0f1f8;
+  --surface-active: #e5e7f2;
+  --text-primary: #0b0d17;
+  --text-secondary: #3b4058;
+  --text-muted: #6b7090;
+  --border: #0b0d171f;
+  --border-strong: #0b0d173d;
+  --accent: #6c4bff;
+  --accent-strong: #6c4bff;
+  --on-accent: #fff;
+  --accent-soft: #6c4bff1f;
+  --mint: #0ea57a;
+  --success: #0e9f73;
+  --warning: #b8701a;
+  --danger: #d13a5c;
+  --info: #2a7fd4;
+  --fix: #b8324f;
+}
+
+body {
+  background: var(--background);
+  color: var(--text-primary);
+  font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.006em;
+  font-weight: 450;
+  transition:
+    background-color var(--duration-normal) ease,
+    color var(--duration-normal) ease;
+}
+
+/* Monospace is reserved for code and formulas. Everything else is Manrope. */
+html.ops-theme .font-code,
+html.ops-theme code,
+html.ops-theme kbd,
+html.ops-theme pre {
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  letter-spacing: 0;
+}
+
+@layer base {
+  html.ops-theme h1,
+  html.ops-theme h2,
+  html.ops-theme h3 {
+    letter-spacing: -0.025em;
+    font-weight: 700;
+  }
+}
+
+/* Small uppercase label used above headings and for metadata. */
+.eyebrow {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+/* Figures that should line up: stats, scores, costs, timers. */
+.figures {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.story-mode {
+  font-weight: 400;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
+  color: var(--text-primary);
+}
+
+/* Buttons without an explicit radius get the standard control radius; every live button presses in. */
+button:not(:disabled):not([class*="rounded-"]),
+.btn-press:not([class*="rounded-"]) {
+  border-radius: 10px;
+}
+button:not(:disabled),
+.btn-press {
+  transition:
+    scale var(--duration-fast) var(--ease-spring-interactive),
+    filter var(--duration-fast) ease,
+    color var(--duration-fast) ease,
+    background-color var(--duration-fast) ease,
+    border-color var(--duration-fast) ease,
+    box-shadow var(--duration-fast) ease;
+}
+button:not(:disabled):active,
+.btn-press:active {
+  filter: brightness(0.96);
+  scale: 0.97;
+}
+
+/* Page background: violet glow top-left, mint wash bottom-right, faint control-room grid. */
+.app-grid-background {
+  background:
+    radial-gradient(ellipse 980px 600px at 10% -12%, color-mix(in srgb, var(--accent-strong) 18%, transparent), transparent 62%),
+    radial-gradient(ellipse 820px 620px at 106% 108%, color-mix(in srgb, var(--mint) 7%, transparent), transparent 60%),
+    linear-gradient(var(--grid-line) 1px, transparent 1px) 0 0 / 56px 56px,
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px) 0 0 / 56px 56px,
+    var(--background);
+  background-attachment: fixed;
+}
+
+/* Frosted control-room panel. */
+.glass-panel {
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+
+.brand-gradient-text {
+  color: transparent;
+  background-image: linear-gradient(92deg, #c4b5ff 0%, #9b82ff 38%, #3cffc2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.looping-preview::-webkit-media-controls,
+.looping-preview::-webkit-media-controls-enclosure,
+.looping-preview::-webkit-media-controls-panel,
+.looping-preview::-webkit-media-controls-overlay-play-button,
+.looping-preview::-webkit-media-controls-start-playback-button {
+  -webkit-appearance: none;
+  display: none !important;
+  opacity: 0;
+}
+
+/* Smooth scrolling (Lenis) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Reduced motion, both OS-level and the in-app toggle. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+html.reduce-motion *,
+html.reduce-motion ::before,
+html.reduce-motion ::after {
+  scroll-behavior: auto !important;
+  transition-duration: 0.001ms !important;
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+}
+
+/* Rotating glow border on the primary CTA. */
+@property --glow-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@keyframes cta-glow-spin {
+  to {
+    --glow-angle: 360deg;
+  }
+}
+.cta-glow-border {
+  isolation: isolate;
+  position: relative;
+}
+.cta-glow-border::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  padding: 2px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: conic-gradient(from var(--glow-angle), transparent, var(--accent-glow), #3cffc299, transparent 40%);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: cta-glow-spin 3.5s linear infinite;
+}
+
+/* Live status dot (mint), used in HUD chips and the footer. */
+@keyframes status-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  80%,
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+.status-dot {
+  position: relative;
+  display: inline-block;
+  height: 8px;
+  width: 8px;
+  border-radius: 9999px;
+  background: var(--mint);
+}
+.status-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  animation: status-ping 1.8s var(--ease-spring-interactive) infinite;
+}
+.status-dot[data-state="down"] {
+  background: var(--danger);
+}
+
+@keyframes marquee-x {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes orbit-spin {
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+@keyframes roadmap-path-flow-vertical {
+  to {
+    stroke-dashoffset: -16px;
+  }
+}
+.roadmap-path-flow-vertical {
+  animation: roadmap-path-flow-vertical 1.1s linear infinite;
+}
+
+@keyframes route-settle-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes roadmap-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 #0000;
+  }
+  50% {
+    box-shadow: 0 0 22px 1px var(--roadmap-glow-color, #7c5cff73);
+  }
+}
+@keyframes roadmap-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes roadmap-check-in {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes enter-workspace {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes draw-check {
+  from {
+    stroke-dashoffset: 48px;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes result-reveal {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes success-glow {
+  0% {
+    box-shadow: 0 0 #0000;
+  }
+  30% {
+    box-shadow:
+      0 0 0 3px var(--success),
+      0 0 40px 4px color-mix(in srgb, var(--success) 45%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 #0000;
+  }
+}
+@keyframes learn-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes learn-node-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes learn-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* Hero entrance */
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes hero-headline-in {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(28px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes hero-scroll-cue {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(6px);
+  }
+}
+@keyframes hero-line-draw {
+  from {
+    stroke-dashoffset: 40px;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes hero-node-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 var(--node-glow, transparent);
+  }
+  50% {
+    box-shadow: 0 0 18px 2px var(--node-glow, transparent);
+  }
+}
+@keyframes hero-packet {
+  from {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  to {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+@keyframes hero-gradient-shift {
+  0%,
+  100% {
+    background-position: 0%;
+  }
+  50% {
+    background-position: 100%;
+  }
+}
+.hero-gradient-text {
+  color: transparent;
+  background-image: linear-gradient(90deg, #b4a2ff, #f5f7ff, #3cffc2, #b4a2ff);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: hero-gradient-shift 8s ease-in-out infinite;
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Guide pages paint their own background so the reading theme covers header to footer. */
+.guide-theme {
+  background: var(--background);
+  color: var(--text-primary);
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.35s;
+}
+
+/* Children rise in one after another: result cards, panel sections, lists. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .stagger-in > * {
+    animation: rise-in 0.5s var(--ease-spring-interactive) both;
+  }
+  .stagger-in > :nth-child(2) {
+    animation-delay: 50ms;
+  }
+  .stagger-in > :nth-child(3) {
+    animation-delay: 100ms;
+  }
+  .stagger-in > :nth-child(4) {
+    animation-delay: 150ms;
+  }
+  .stagger-in > :nth-child(5) {
+    animation-delay: 200ms;
+  }
+  .stagger-in > :nth-child(6) {
+    animation-delay: 250ms;
+  }
+  .stagger-in > :nth-child(n + 7) {
+    animation-delay: 300ms;
+  }
+}
+
+@keyframes bar-grow {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+/* Traffic pulses travelling along canvas connections. */
+@keyframes edge-flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+.edge-flow {
+  stroke-dasharray: 1.5 10.5;
+  opacity: 0.55;
+  animation: edge-flow 1.1s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .edge-flow {
+    display: none;
+  }
+}
+
+/* Thin scrollbars inside the workspace panels */
+.thin-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+/* Long-form guide typography */
+.guide-prose p + p {
+  margin-top: 1rem;
+}
+.guide-prose code {
+  border: 1px solid var(--border);
+  background: var(--background-elevated);
+  border-radius: 0.25rem;
+  padding: 0.05rem 0.35rem;
+  font-size: 0.85em;
+  font-weight: 600;
+}
+
+/* Hero entrance choreography (CSS fallback; GSAP drives the home hero). */
+@keyframes hero-sequence-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes hero-sequence-title-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-sequence-header,
+  .hero-sequence-lead,
+  .hero-sequence-title,
+  .hero-sequence-primary,
+  .hero-sequence-secondary,
+  .hero-sequence-tagline {
+    will-change: opacity, transform;
+  }
+  .hero-sequence-header {
+    animation: hero-sequence-reveal 0.5s var(--ease-spring-interactive) 40ms both;
+  }
+  .hero-sequence-lead {
+    animation: hero-sequence-reveal 0.6s var(--ease-spring-interactive) 0.14s both;
+  }
+  .hero-sequence-title {
+    animation: hero-sequence-title-reveal 0.65s var(--ease-spring-interactive) 0.3s both;
+  }
+  .hero-sequence-primary {
+    animation: hero-sequence-reveal 0.55s var(--ease-spring-interactive) 0.52s both;
+  }
+  .hero-sequence-secondary {
+    animation: hero-sequence-reveal 0.55s var(--ease-spring-interactive) 0.62s both;
+  }
+  .hero-sequence-tagline {
+    animation: hero-sequence-reveal 0.6s var(--ease-spring-interactive) 0.78s both;
+  }
+}
+html.reduce-motion .hero-sequence-header,
+html.reduce-motion .hero-sequence-lead,
+html.reduce-motion .hero-sequence-title,
+html.reduce-motion .hero-sequence-primary,
+html.reduce-motion .hero-sequence-secondary,
+html.reduce-motion .hero-sequence-tagline {
+  animation: none;
+}
+
+/* Scroll-triggered reveal used across marketing sections */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s var(--ease-spring-interactive),
+    transform 0.7s var(--ease-spring-interactive);
+}
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: none;
+}
+html.reduce-motion .reveal-on-scroll,
+.no-js .reveal-on-scroll {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes career-signal {
+  from {
+    stroke-dashoffset: 24px;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
